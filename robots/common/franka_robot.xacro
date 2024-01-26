@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:macro name="franka_robot" params="arm_id joint_limits kinematics inertials dynamics parent:='world' xyz:='0 0 0' rpy:='0 0 0' hand:=false gazebo:=false tcp_xyz:='0 0 0.1034' tcp_rpy:='0 0 0' with_sc:='false' ros2_control:=false robot_ip:='' use_fake_hardware:=false fake_sensor_commands:=false">
+  <xacro:macro name="franka_robot" params="arm_id joint_limits kinematics inertials dynamics parent:='world' xyz:='0 0 0' rpy:='0 0 0' ee_id:=none gazebo:=false with_sc:='false' ros2_control:=false robot_ip:='' use_fake_hardware:=false fake_sensor_commands:=false">
 
     <xacro:include filename="$(find franka_description)/robots/common/utils.xacro" />
     <xacro:include filename="$(find franka_description)/robots/common/franka_arm.xacro" />
 
-    <xacro:franka_arm 
+    <xacro:franka_arm
       arm_id="${arm_id}"
       safety_distance="0.03"
       gazebo="${gazebo}"
@@ -16,18 +16,50 @@
       with_sc="${with_sc}"
     />
 
-    <xacro:if value="${hand}">
-      <xacro:include filename="$(find franka_description)/robots/common/franka_hand.xacro"/>
+    <xacro:if value="${ee_id == 'franka_hand'}">
+      <xacro:include filename="$(find franka_description)/end_effectors/common/franka_hand.xacro"/>
+      <xacro:include filename="$(find franka_description)/end_effectors/common/utils.xacro" />
+      <xacro:include filename="$(find franka_description)/end_effectors/$(arg ee_id)/$(arg ee_id)_arguments.xacro" />
+      <xacro:if value="${arm_id == 'fp3'}">
+        <xacro:property name="ee_color" value="black" />
+      </xacro:if>
+      <xacro:if value="${arm_id == 'fr3' or arm_id == 'fer'}">
+        <xacro:property name="ee_color" value="white" />
+      </xacro:if>
       <xacro:franka_hand
+        connected_to="$(arg connection)"
         arm_id="${arm_id}"
-        rpy="0 0 ${-pi/4}"
-        tcp_xyz="${tcp_xyz}"
-        tcp_rpy="${tcp_rpy}"
-        connected_to="${arm_id}_link8"
-        safety_distance="0.03"
+        ee_id="${ee_id}_${ee_color}"
+        ee_inertials="${xacro.load_yaml('$(find franka_description)/end_effectors/$(arg ee_id)/inertials.yaml')}"
+        rpy="$(arg rpy)"
+        xyz="$(arg xyz)"
+        tcp_xyz="$(arg tcp_xyz)"
+        tcp_rpy="$(arg tcp_rpy)"
+        safety_distance="$(arg safety_distance)"
         gazebo="${gazebo}"
+        description_pkg="$(arg description_pkg)"
         with_sc="${with_sc}"
-       />
+      />
+    </xacro:if>
+
+    <xacro:if value="${ee_id != 'none' and ee_id != 'franka_hand'}">
+      <xacro:include filename="$(find franka_description)/end_effectors/common/ee_with_one_link.xacro"/>
+      <xacro:include filename="$(find franka_description)/end_effectors/common/utils.xacro" />
+      <xacro:include filename="$(find franka_description)/end_effectors/$(arg ee_id)/$(arg ee_id)_arguments.xacro" />
+      <xacro:ee_with_one_link
+        connected_to="$(arg connection)"
+        arm_id="${arm_id}"
+        ee_id="${ee_id}"
+        ee_inertials="${xacro.load_yaml('$(find franka_description)/end_effectors/$(arg ee_id)/inertials.yaml')}"
+        rpy="$(arg rpy)"
+        xyz="$(arg xyz)"
+        tcp_xyz="$(arg tcp_xyz)"
+        tcp_rpy="$(arg tcp_rpy)"
+        safety_distance="$(arg safety_distance)"
+        gazebo="${gazebo}"
+        description_pkg="$(arg description_pkg)"
+        with_sc="${with_sc}"
+      />
     </xacro:if>
 
     <!-- Definition of additional Gazebo tags -->
@@ -75,7 +107,15 @@
          tip="${arm_id}_joint8"
        />
 
-      <xacro:if value="${hand}">
+      <xacro:if value="${ee_id == franka_hand_white}">
+        <xacro:gazebo-joint joint="${arm_id}_finger_joint1" transmission="hardware_interface/EffortJointInterface" />
+        <xacro:gazebo-joint joint="${arm_id}_finger_joint2" transmission="hardware_interface/EffortJointInterface" />
+        <!-- Friction specific material for Rubber/Rubber contact -->
+        <xacro:gazebo-friction link="${arm_id}_leftfinger" mu="1.13" />
+        <xacro:gazebo-friction link="${arm_id}_rightfinger" mu="1.13" />
+      </xacro:if>
+
+      <xacro:if value="${ee_id == franka_hand_black}">
         <xacro:gazebo-joint joint="${arm_id}_finger_joint1" transmission="hardware_interface/EffortJointInterface" />
         <xacro:gazebo-joint joint="${arm_id}_finger_joint2" transmission="hardware_interface/EffortJointInterface" />
         <!-- Friction specific material for Rubber/Rubber contact -->
@@ -91,11 +131,11 @@
         <self_collide>true</self_collide>
       </gazebo>
     </xacro:if>
-    
+
     <xacro:if value="${ros2_control}">
       <xacro:include filename="$(find franka_description)/robots/common/franka_arm.ros2_control.xacro"/>
       <xacro:franka_arm_ros2_control arm_id="$(arg arm_id)" robot_ip="$(arg robot_ip)" use_fake_hardware="$(arg use_fake_hardware)" fake_sensor_commands="$(arg fake_sensor_commands)"/>
     </xacro:if>
-      
+
   </xacro:macro>
 </robot>

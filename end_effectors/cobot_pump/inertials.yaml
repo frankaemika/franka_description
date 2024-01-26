@@ -1,0 +1,13 @@
+cobot_pump:
+  origin:
+    xyz: 0 0 0.063
+    rpy: 0 0 0
+  mass: 1.01
+  inertia:
+    xx: 0.001
+    yy: 0.001
+    zz: 0.001
+    xy: 0
+    xz: 0
+    yz: 0
+

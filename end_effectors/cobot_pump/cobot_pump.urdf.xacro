@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="cobot_pump">
+  <xacro:include filename="$(find franka_description)/end_effectors/common/utils.xacro" />
+  <xacro:include filename="$(find franka_description)/end_effectors/common/ee_with_one_link.xacro"/>
+  <xacro:include filename="$(find franka_description)/end_effectors/cobot_pump/cobot_pump_arguments.xacro"/>
+
+  <xacro:ee_with_one_link connected_to="$(arg connection)"
+                          arm_id="$(arg arm_id)"
+                          ee_id="$(arg ee_id)"
+                          ee_inertials="${xacro.load_yaml('$(find franka_description)/end_effectors/$(arg ee_id)/inertials.yaml')}"
+                          rpy="$(arg rpy)"
+                          xyz="$(arg xyz)"
+                          tcp_xyz="$(arg tcp_xyz)"
+                          tcp_rpy="$(arg tcp_rpy)"
+                          safety_distance="$(arg safety_distance)"
+                          gazebo="$(arg gazebo)"
+                          description_pkg="$(arg description_pkg)"
+                          with_sc="$(arg with_sc)">
+   </xacro:ee_with_one_link>
+
+</robot>

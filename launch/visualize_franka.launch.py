@@ -22,9 +22,9 @@ from launch_ros.actions import Node
 import xacro
 
 
-def robot_state_publisher_spawner(context: LaunchContext, arm_id, load_gripper):
+def robot_state_publisher_spawner(context: LaunchContext, arm_id, ee_id):
     arm_id_str = context.perform_substitution(arm_id)
-    load_gripper_str = context.perform_substitution(load_gripper)
+    load_gripper_str = context.perform_substitution(ee_id)
     franka_xacro_filepath = os.path.join(
         get_package_share_directory("franka_description"),
         "robots",
@@ -32,7 +32,7 @@ def robot_state_publisher_spawner(context: LaunchContext, arm_id, load_gripper):
         arm_id_str + ".urdf.xacro",
     )
     robot_description = xacro.process_file(
-        franka_xacro_filepath, mappings={"hand": load_gripper_str}
+        franka_xacro_filepath, mappings={"ee_id": load_gripper_str}
     ).toprettyxml(indent="  ")
 
     return [
@@ -67,9 +67,9 @@ def generate_launch_description():
         [
             DeclareLaunchArgument(
                 load_gripper_parameter_name,
-                default_value="true",
-                description="Use Franka Gripper as end-effector if true. "
-                "Robot is loaded without end-effector otherwise",
+                default_value="none",
+                description="ID of the type of end-effector used. Supporter values: "
+                "none, franka_hand_white, franka_hand_black, cobot_pump",
             ),
             DeclareLaunchArgument(
                 arm_id_parameter_name,
