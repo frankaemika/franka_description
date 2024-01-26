@@ -3,10 +3,10 @@
 args=$*
 shift $#
 
-source /ros_entrypoint.sh 
+source /ros_entrypoint.sh
 
 cd /workspaces
-colcon build --package-select franka_description > /dev/null
+colcon build --packages-select franka_description > /dev/null
 source install/setup.bash
 
 cd src/franka_description

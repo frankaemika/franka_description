@@ -28,5 +28,5 @@ USER $USERNAME
 
 RUN echo "source /ros_entrypoint.sh" >>~/.bashrc
 ARG MAX_ROS_DOMAIN_ID=232
-RUN echo "export ROS_DOMAIN_ID=$(( $RANDOM % $MAX_ROS_DOMAIN_ID ))" >>~/.bashrc
+RUN echo "export ROS_DOMAIN_ID=100" >>~/.bashrc
 RUN echo "set +e" >>~/.bashrc
