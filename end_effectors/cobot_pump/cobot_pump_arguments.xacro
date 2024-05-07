@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Name for the robot -->
+  <xacro:arg name="arm_id" default="fp3" />
+
+  <!-- End-effector id" -->
+  <xacro:arg name="ee_id" default="cobot_pump" />
+
+  <!-- Where is the end-effector connected to?  -->
+  <xacro:arg name="connection" default="$(arg arm_id)_link8" />
+
+  <!-- Should self-collision be enabled? -->
+  <xacro:arg name="with_sc" default="false" />
+
+  <!-- Positional offset between ee and parent frame -->
+  <xacro:arg name="xyz" default="0 0 0" />
+
+  <!-- Rotational offset between ee and parent frame -->
+  <xacro:arg name="rpy" default= "0 0 0" />
+
+  <!-- Positional offset between ee frame and tcp frame -->
+  <xacro:arg name="tcp_xyz" default="0 0 0.105" />
+
+  <!-- Rotational offset between ee frame and tcp frame -->
+  <xacro:arg name="tcp_rpy" default="0 0 0" />
+
+  <!-- Safety distance for the collision capsules -->
+  <xacro:arg name="safety_distance" default="0.03" />
+
+  <!-- Is the robot being simulated in gazebo? -->
+  <xacro:arg name="gazebo" default="false" />
+
+  <!-- Name of the description package -->
+  <xacro:arg name="description_pkg" default="franka_description" />
+
+</robot>

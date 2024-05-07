@@ -20,30 +20,31 @@ To start the generation, execute the start.sh script. The arguments passed to th
 
 ```
 # Start the generation of the urdf model
-./scripts/create_urdf.sh <robot_id>
+./scripts/create_urdf.sh <robot_id> <ee_id>
 ```
 
 The urdf generation is performed by the create_urdf.py script which offers several parameters to customize the output urdf model:
 
 ```
-usage: create_urdf.py [-h] [--no-hand] [--with-sc] [--abs-path] [--host-dir HOST_DIR] robot_model
+usage: create_urdf.py [-h] [--with-sc] [--abs-path] [--host-dir HOST_DIR] [--only-ee] robot_model robot_ee
 
 Generate franka robots urdf models. Script to be executed from franka_description root folder!
 
 positional arguments:
-  robot_model          id of the robot model (accepted values are: fr3, fp3, fer)
+  robot_model          id of the robot model (accepted values are: fr3, fp3, fer, none)
+  robot_ee             id of the robot end effector (accepted values are: none, franka_hand, cobot_pump)
 
 optional arguments:
   -h, --help           show this help message and exit
-  --no-hand            Disable loading of franka hand.
   --with-sc            Include self-collision volumes in the urdf model.
   --abs-path           Use absolute paths.
   --host-dir HOST_DIR  Provide a host directory for the absolute path.
+  --only-ee            Get URDF with solely end-effector data
 ```
 
 ### Visualize via ROS2
 
-`franka_description` is offered as a ROS2 package. 
+`franka_description` is offered as a ROS2 package.
 The urdf file can be visualized via RViz with the following command:
 
 ```
@@ -51,9 +52,9 @@ The urdf file can be visualized via RViz with the following command:
 # The arguments given to the .sh script are forwarded as launch arguments
 # Accepted launch arguments are:
 #     arm_id - accepted values are: fr3, fp3, fer
-#     load_gripper - accepted values are: true, false
+#     load_gripper - accepted values are: none, franka_hand, cobot_pump
 
-./scripts/visualize_franka.sh arm_id:=<robot_id>
+./scripts/visualize_franka.sh arm_id:=<robot_id> load_gripper:=<ee_id>
 
 ```
 

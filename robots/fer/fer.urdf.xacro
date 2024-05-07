@@ -7,11 +7,7 @@
   <xacro:arg name="arm_id" default="fer" />
 
   <!-- Should an end-effector be mounted at the flange?" -->
-  <xacro:arg name="hand" default="true" />
-  <!-- Positional offset between $(arm_id)_hand -> $(arm_id)_hand_tcp [m]. Only used when hand:=true -->
-  <xacro:arg name="tcp_xyz" default="0 0 0.1034" />
-  <!-- Rotational offset between $(arm_id)_hand -> $(arm_id)_hand_tcp [rad]. Only used when hand:=true -->
-  <xacro:arg name="tcp_rpy" default="0 0 0" />
+  <xacro:arg name="ee_id" default="none" />
 
   <!-- Is the robot being simulated in gazebo?" -->
   <xacro:arg name="gazebo" default="false" />
@@ -26,9 +22,9 @@
   <xacro:arg name="with_sc" default="false" />
 
   <!-- Is the robot being controlled with ros2_control?" -->
-  <xacro:arg name="ros2_control" default="false" /> 
+  <xacro:arg name="ros2_control" default="false" />
   <!-- IP address or hostname of the robot" -->
-  <xacro:arg name="robot_ip" default="" /> 
+  <xacro:arg name="robot_ip" default="" />
   <!-- Should a fake hardware be used? -->
   <xacro:arg name="use_fake_hardware" default="false" />
   <!-- Should fake sensors be used? -->
@@ -39,9 +35,7 @@
                       inertials="${xacro.load_yaml('$(find franka_description)/robots/$(arg arm_id)/inertials.yaml')}"
                       kinematics="${xacro.load_yaml('$(find franka_description)/robots/$(arg arm_id)/kinematics.yaml')}"
                       dynamics="${xacro.load_yaml('$(find franka_description)/robots/$(arg arm_id)/dynamics.yaml')}"
-                      hand="$(arg hand)"
-                      tcp_xyz="$(arg tcp_xyz)"
-                      tcp_rpy="$(arg tcp_rpy)"
+                      ee_id="$(arg ee_id)"
                       with_sc="$(arg with_sc)"
                       ros2_control="$(arg ros2_control)"
                       robot_ip="$(arg robot_ip)"

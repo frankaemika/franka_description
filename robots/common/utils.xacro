@@ -38,17 +38,17 @@
     <link name="${prefix}${name}">
       <visual name="${prefix}${name}_visual">
         <geometry>
-          <mesh filename="package://${description_pkg}/meshes/${arm_id}/visual/${name}.dae" />
+          <mesh filename="package://${description_pkg}/meshes/robot_arms/${arm_id}/visual/${name}.dae" />
         </geometry>
       </visual>
       <collision name="${prefix}${name}_collision">
         <geometry>
-          <mesh filename="package://franka_description/meshes/${arm_id}/collision/${name}.stl" />
+          <mesh filename="package://franka_description/meshes/robot_arms/${arm_id}/collision/${name}.stl" />
         </geometry>
       </collision>
       <xacro:franka-inertials name="${name}" />
     </link>
-    
+
     <!-- sub-link defining coarse geometries of real robot's internal self-collision -->
     <xacro:if value="${with_sc}">
       <link name="${prefix}${name}_sc">

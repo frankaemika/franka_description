@@ -29,13 +29,13 @@ xacro_file_name = path.join(
 
 def test_load():
     """
-    Test of hand parameter equal to false
+    Test of hand parameter equal to none
     """
     urdf = xacro.process_file(
         xacro_file_name,
         mappings={
             "arm_id": "fer",
-            "hand": "false",
+            "ee_id": "none",
         },
     ).toxml()
     assert urdf.find("fer_finger_joint1") == -1
@@ -43,10 +43,10 @@ def test_load():
 
 def test_load_with_gripper():
     """
-    Test of hand parameter equal to true
+    Test of hand parameter equal to a value
     """
     urdf = xacro.process_file(
-        xacro_file_name, mappings={"arm_id": "fer", "hand": "true"}
+        xacro_file_name, mappings={"arm_id": "fer", "ee_id": "franka_hand_white"}
     ).toxml()
     assert urdf.find("fer_finger_joint") != -1
 
