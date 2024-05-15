@@ -21,10 +21,10 @@ def str_to_bool(s):
     return s.lower() in ["true", "1", "yes", "y"]
 
 
-def convert_xacro_to_urdf(xacro_file, with_sc, ee_id, robot):
+def convert_xacro_to_urdf(xacro_file, with_sc, ee_id, hand, robot):
     """Convert xacro file into a URDF file."""
     urdf = xacro.process_file(
-        xacro_file, mappings={"with_sc": str(with_sc), "ee_id": str(ee_id), "arm_id": str(robot)}
+        xacro_file, mappings={"with_sc": str(with_sc), "ee_id": str(ee_id), "hand":str(hand), "arm_id": str(robot)}
     )
     urdf_file = urdf.toprettyxml(indent="  ")
     return urdf_file
@@ -35,10 +35,10 @@ def convert_package_name_to_absolute_path(package_name, package_path, urdf_file)
     urdf_file = urdf_file.replace("package://{}".format(package_name), package_path)
     return urdf_file
 
-def urdf_generation(package_path, xacro_file, file_name, WITH_SC, HAND, robot):
+def urdf_generation(package_path, xacro_file, file_name, WITH_SC, EE, HAND, robot):
     """Generate URDF file and save it."""
     xacro_file = os.path.join(package_path, xacro_file)
-    urdf_file = convert_xacro_to_urdf(xacro_file, WITH_SC, HAND, robot)
+    urdf_file = convert_xacro_to_urdf(xacro_file, WITH_SC, EE, HAND, robot)
     if ABSOLUTE_PATHS and (HOST_DIR is None or HOST_DIR == ""):
         urdf_file = convert_package_name_to_absolute_path(
             package_name, package_path, urdf_file
@@ -85,10 +85,17 @@ if __name__ == "__main__":
         type=str,
         help="id of the robot model (accepted values are: {})".format(robots_str),
     )
+    parser.add_argument(
+        "--no-ee",
+        help="Disable loading of end-effector.",
+        action="store_const",
+        const=True,
+    )
     ee_str = ", ".join([f"{item}" for item in END_EFFECTORS])
     parser.add_argument(
-        "robot_ee",
+        "--robot-ee",
         type=str,
+        default="franka_hand",
         help="id of the robot end effector (accepted values are: {})".format(ee_str),
     )
     parser.add_argument(
@@ -113,7 +120,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     ROBOT_MODEL = args.robot_model.lower()
-    HAND = args.robot_ee.lower()
+    HAND = not args.no_ee
+    EE = args.robot_ee.lower() if args.robot_ee is not None else "franka_hand"
     WITH_SC = args.with_sc if args.with_sc is not None else False
     ABSOLUTE_PATHS = args.abs_path if args.abs_path is not None else False
     HOST_DIR = args.host_dir
@@ -128,23 +136,25 @@ if __name__ == "__main__":
     package_path = os.getcwd()
 
     if ONLY_EE:
-        print(f"\n*** Creating URDF for {HAND} ***")
-        xacro_file = f"end_effectors/{HAND}/{HAND}.urdf.xacro"
-        file_name = f"{HAND}"
+        print(f"\n*** Creating URDF for {EE} ***")
+        xacro_file = f"end_effectors/{EE}/{EE}.urdf.xacro"
+        file_name = f"{EE}"
         if ROBOT_MODEL == "none" or ROBOT_MODEL == "all":
             robot_prefix="robot"
         else:
             robot_prefix=ROBOT_MODEL
-        urdf_generation(package_path, xacro_file, file_name, WITH_SC, HAND, robot_prefix)
+        urdf_generation(package_path, xacro_file, file_name, WITH_SC, EE, HAND, robot_prefix)
     else:
         if ROBOT_MODEL == "none":
             print(f"\n*** Robot model must be specified ***")
         else:
             for robot in ROBOTS:
-                print(f"\n*** Creating URDF for {robot} ***")
                 xacro_file = f"robots/{robot}/{robot}.urdf.xacro"
-                if HAND != "none":
-                    file_name = f"{robot}_{HAND}"
+                if HAND != False and EE != "none":
+                    print(f"\n*** Creating URDF for {robot} and {EE} ***")
+                    file_name = f"{robot}_{EE}"
                 else:
+                    print(f"\n*** WARNING: --no-ee argument will be removed in future releases, introducing none as ee id***")
+                    print(f"\n*** Creating URDF for {robot} ***")
                     file_name = f"{robot}"
-                urdf_generation(package_path, xacro_file, file_name, WITH_SC, HAND, robot)
+                urdf_generation(package_path, xacro_file, file_name, WITH_SC, EE, HAND, robot)

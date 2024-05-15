@@ -7,7 +7,10 @@
   <xacro:arg name="arm_id" default="fp3" />
 
   <!-- Should an end-effector be mounted at the flange?" -->
-  <xacro:arg name="ee_id" default="none" />
+  <xacro:arg name="hand" default="true" />
+
+  <!-- Which end-effector would be mounted at the flange?" -->
+  <xacro:arg name="ee_id" default="franka_hand" />
 
   <!-- Should self-collision be enabled? -->
   <xacro:arg name="with_sc" default="false" />
@@ -26,6 +29,7 @@
                       inertials="${xacro.load_yaml('$(find franka_description)/robots/$(arg arm_id)/inertials.yaml')}"
                       kinematics="${xacro.load_yaml('$(find franka_description)/robots/$(arg arm_id)/kinematics.yaml')}"
                       dynamics="${xacro.load_yaml('$(find franka_description)/robots/$(arg arm_id)/dynamics.yaml')}"
+                      hand="$(arg hand)"
                       ee_id="$(arg ee_id)"
                       with_sc="$(arg with_sc)"
                       ros2_control="$(arg ros2_control)"
