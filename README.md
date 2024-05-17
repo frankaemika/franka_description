@@ -26,16 +26,17 @@ To start the generation, execute the start.sh script. The arguments passed to th
 The urdf generation is performed by the create_urdf.py script which offers several parameters to customize the output urdf model:
 
 ```
-usage: create_urdf.py [-h] [--with-sc] [--abs-path] [--host-dir HOST_DIR] [--only-ee] robot_model robot_ee
+usage: create_urdf.py [-h] [--robot-ee] [--no-ee] [--with-sc] [--abs-path] [--host-dir HOST_DIR] [--only-ee] robot_model
 
 Generate franka robots urdf models. Script to be executed from franka_description root folder!
 
 positional arguments:
   robot_model          id of the robot model (accepted values are: fr3, fp3, fer, none)
-  robot_ee             id of the robot end effector (accepted values are: none, franka_hand, cobot_pump)
 
 optional arguments:
   -h, --help           show this help message and exit
+  --robot-ee           id of the robot end effector (accepted values are: franka_hand, cobot_pump)
+  --no-ee              Disable loading of end-effector (robot-ee would be ingnored if set) [WARNING: this argument will be removed in future releases, introducing "none" as ee id].
   --with-sc            Include self-collision volumes in the urdf model.
   --abs-path           Use absolute paths.
   --host-dir HOST_DIR  Provide a host directory for the absolute path.
@@ -52,9 +53,10 @@ The urdf file can be visualized via RViz with the following command:
 # The arguments given to the .sh script are forwarded as launch arguments
 # Accepted launch arguments are:
 #     arm_id - accepted values are: fr3, fp3, fer
-#     load_gripper - accepted values are: none, franka_hand, cobot_pump
+#     load_gripper - accepted values are: true (default ee_id is franka_hand), false (ee_id will be ignored) [WARNING: this argument will be removed in future releases, introducing "none" as ee id]
+#     ee_id - accepted values are: franka_hand, cobot_pump
 
-./scripts/visualize_franka.sh arm_id:=<robot_id> load_gripper:=<ee_id>
+./scripts/visualize_franka.sh arm_id:=<robot_id> 
 
 ```
 

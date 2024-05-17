@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:macro name="franka_robot" params="arm_id joint_limits kinematics inertials dynamics parent:='world' xyz:='0 0 0' rpy:='0 0 0' ee_id:=none gazebo:=false with_sc:='false' ros2_control:=false robot_ip:='' use_fake_hardware:=false fake_sensor_commands:=false">
+  <xacro:macro name="franka_robot" params="arm_id joint_limits kinematics inertials dynamics parent:='world' xyz:='0 0 0' rpy:='0 0 0' hand ee_id:=none gazebo:=false with_sc:='false' ros2_control:=false robot_ip:='' use_fake_hardware:=false fake_sensor_commands:=false">
 
     <xacro:include filename="$(find franka_description)/robots/common/utils.xacro" />
     <xacro:include filename="$(find franka_description)/robots/common/franka_arm.xacro" />
@@ -16,7 +16,7 @@
       with_sc="${with_sc}"
     />
 
-    <xacro:if value="${ee_id == 'franka_hand'}">
+    <xacro:if value="${hand and ee_id == 'franka_hand'}">
       <xacro:include filename="$(find franka_description)/end_effectors/common/franka_hand.xacro"/>
       <xacro:include filename="$(find franka_description)/end_effectors/common/utils.xacro" />
       <xacro:include filename="$(find franka_description)/end_effectors/$(arg ee_id)/$(arg ee_id)_arguments.xacro" />
@@ -42,7 +42,7 @@
       />
     </xacro:if>
 
-    <xacro:if value="${ee_id != 'none' and ee_id != 'franka_hand'}">
+    <xacro:if value="${hand and ee_id != 'none' and ee_id != 'franka_hand'}">
       <xacro:include filename="$(find franka_description)/end_effectors/common/ee_with_one_link.xacro"/>
       <xacro:include filename="$(find franka_description)/end_effectors/common/utils.xacro" />
       <xacro:include filename="$(find franka_description)/end_effectors/$(arg ee_id)/$(arg ee_id)_arguments.xacro" />
