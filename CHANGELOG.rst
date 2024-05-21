@@ -2,6 +2,14 @@
 Changelog for package franka_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
+* feat: end-effector can be deactivated with an argument
+* feat: add dedicated folder for end-effectors
+* fix: license name in readme
+* Contributors: Guillermo Gomez Pena
+
 0.1.10 (2024-04-22)
 -------------------
 
