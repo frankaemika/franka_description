@@ -152,7 +152,7 @@ if __name__ == "__main__":
         else:
             for robot in ROBOTS:
                 xacro_file = f"robots/{robot}/{robot}.urdf.xacro"
-                if HAND is not False and EE is not "none":
+                if HAND is not False and EE != "none":
                     print(f"\n*** Creating URDF for {robot} and {EE} ***")
                     file_name = f"{robot}_{EE}"
                 else:
