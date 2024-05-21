@@ -13,9 +13,9 @@
 #  limitations under the License.
 
 from os import path
-from ament_index_python.packages import get_package_share_directory
-import xacro
 
+import xacro
+from ament_index_python.packages import get_package_share_directory
 
 arm_id_ = "fer"
 
@@ -28,9 +28,7 @@ xacro_file_name = path.join(
 
 
 def test_load():
-    """
-    Test of hand parameter equal to none
-    """
+    """ Test of hand parameter equal to none. """
     urdf = xacro.process_file(
         xacro_file_name,
         mappings={
@@ -42,19 +40,15 @@ def test_load():
 
 
 def test_load_with_gripper():
-    """
-    Test of hand parameter equal to a value
-    """
+    """ Test of hand parameter equal to a value. """
     urdf = xacro.process_file(
-        xacro_file_name, mappings={"arm_id": "fer", "ee_id": "franka_hand_white"}
+        xacro_file_name, mappings={"arm_id": "fer", "ee_id": "franka_hand"}
     ).toxml()
     assert urdf.find("fer_finger_joint") != -1
 
 
 def test_check_interfaces():
-    """
-    Test of the parameters for ros2_control hardware interface.
-    """
+    """ Test of the parameters for ros2_control hardware interface. """
     urdf = xacro.process_file(
         xacro_file_name, mappings={"ros2_control": "true"}
     ).toxml()
@@ -66,10 +60,7 @@ def test_check_interfaces():
 
 
 def test_load_with_fake_hardware():
-    """
-    Test of use_fake_hardware parameter
-    for ros2_control hardware interface.
-    """
+    """ Test of use_fake_hardware parameter for ros2_control hardware interface. """
     urdf = xacro.process_file(
         xacro_file_name, mappings={"ros2_control": "true", "use_fake_hardware": "true"}
     ).toxml()
@@ -77,10 +68,7 @@ def test_load_with_fake_hardware():
 
 
 def test_load_with_robot_ip():
-    """
-    Test of robot_ip parameter
-    for ros2_control hardware interface.
-    """
+    """ Test of robot_ip parameter for ros2_control hardware interface. """
     urdf = xacro.process_file(
         xacro_file_name,
         mappings={"ros2_control": "true", "robot_ip": "franka_ip_address"},

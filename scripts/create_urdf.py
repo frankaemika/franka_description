@@ -12,8 +12,9 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-import os
 import argparse
+import os
+
 import xacro
 
 
@@ -24,7 +25,8 @@ def str_to_bool(s):
 def convert_xacro_to_urdf(xacro_file, with_sc, ee_id, hand, robot):
     """Convert xacro file into a URDF file."""
     urdf = xacro.process_file(
-        xacro_file, mappings={"with_sc": str(with_sc), "ee_id": str(ee_id), "hand":str(hand), "arm_id": str(robot)}
+        xacro_file, mappings={"with_sc": str(with_sc), "ee_id": str(
+            ee_id), "hand": str(hand), "arm_id": str(robot)}
     )
     urdf_file = urdf.toprettyxml(indent="  ")
     return urdf_file
@@ -34,6 +36,7 @@ def convert_package_name_to_absolute_path(package_name, package_path, urdf_file)
     """Replace a ROS package names with the absolute paths."""
     urdf_file = urdf_file.replace("package://{}".format(package_name), package_path)
     return urdf_file
+
 
 def urdf_generation(package_path, xacro_file, file_name, WITH_SC, EE, HAND, robot):
     """Generate URDF file and save it."""
@@ -129,7 +132,6 @@ if __name__ == "__main__":
 
     assert ROBOT_MODEL in ROBOTS or ROBOT_MODEL == "all" or ROBOT_MODEL == "none"
 
-
     if ROBOT_MODEL != "all" and ROBOT_MODEL != "none":
         ROBOTS = [ROBOT_MODEL]
 
@@ -140,21 +142,23 @@ if __name__ == "__main__":
         xacro_file = f"end_effectors/{EE}/{EE}.urdf.xacro"
         file_name = f"{EE}"
         if ROBOT_MODEL == "none" or ROBOT_MODEL == "all":
-            robot_prefix="robot"
+            robot_prefix = "robot"
         else:
-            robot_prefix=ROBOT_MODEL
+            robot_prefix = ROBOT_MODEL
         urdf_generation(package_path, xacro_file, file_name, WITH_SC, EE, HAND, robot_prefix)
     else:
         if ROBOT_MODEL == "none":
-            print(f"\n*** Robot model must be specified ***")
+            print("\n*** Robot model must be specified ***")
         else:
             for robot in ROBOTS:
                 xacro_file = f"robots/{robot}/{robot}.urdf.xacro"
-                if HAND != False and EE != "none":
+                if HAND is not False and EE is not "none":
                     print(f"\n*** Creating URDF for {robot} and {EE} ***")
                     file_name = f"{robot}_{EE}"
                 else:
-                    print(f"\n*** WARNING: --no-ee argument will be removed in future releases, introducing none as ee id***")
+                    print(
+                        "\n*** WARNING: --no-ee argument will be removed in future releases, "
+                        "introducing none as ee id***")
                     print(f"\n*** Creating URDF for {robot} ***")
                     file_name = f"{robot}"
                 urdf_generation(package_path, xacro_file, file_name, WITH_SC, EE, HAND, robot)

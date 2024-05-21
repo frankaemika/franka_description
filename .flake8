@@ -1,0 +1,15 @@
+[flake8]
+max-line-length = 100
+
+; extend-exclude =
+;     franka_api,
+
+extend-ignore =
+    # See https://github.com/PyCQA/pycodestyle/issues/373
+    E203,
+
+    # TODO(qu_zh): Add "E501 line too long" check later
+    E501,
+
+    # See https://github.com/behave/behave/issues/574
+    F811,

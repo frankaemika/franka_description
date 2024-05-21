@@ -14,18 +14,19 @@
 
 import os
 
+import xacro
 from ament_index_python.packages import get_package_share_directory
-from launch import LaunchDescription, LaunchContext
+from launch_ros.actions import Node
+
+from launch import LaunchContext, LaunchDescription
 from launch.actions import DeclareLaunchArgument, OpaqueFunction
 from launch.substitutions import LaunchConfiguration
-from launch_ros.actions import Node
-import xacro
 
 
 def robot_state_publisher_spawner(context: LaunchContext, arm_id, load_gripper, ee_id):
     arm_id_str = context.perform_substitution(arm_id)
     load_gripper_str = context.perform_substitution(load_gripper)
-    ee_id_str = context.perform_substitution(ee_id) 
+    ee_id_str = context.perform_substitution(ee_id)
     franka_xacro_filepath = os.path.join(
         get_package_share_directory("franka_description"),
         "robots",
