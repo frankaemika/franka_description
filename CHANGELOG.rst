@@ -2,8 +2,8 @@
 Changelog for package franka_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.0 (2024-05-21)
+------------------
 
 * feat: end-effector can be deactivated with an argument
 * feat: add dedicated folder for end-effectors
