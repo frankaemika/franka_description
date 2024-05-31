@@ -81,7 +81,7 @@ def generate_launch_description():
                 ee_id_parameter_name,
                 default_value="franka_hand",
                 description="ID of the type of end-effector used. Supporter values: "
-                "none, franka_hand_white, franka_hand_black, cobot_pump",
+                "none, franka_hand, cobot_pump",
             ),
             DeclareLaunchArgument(
                 arm_id_parameter_name,
