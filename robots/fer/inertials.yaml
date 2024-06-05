@@ -1,7 +1,7 @@
 link0:
   origin:
     xyz: -0.0172 0.0004 0.0745
-    rpy: 
+    rpy: 0 0 0
   mass: 2.3966
   inertia:
     xx: 0.0090
