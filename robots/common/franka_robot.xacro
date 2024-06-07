@@ -45,7 +45,7 @@
       />
     </xacro:if>
 
-    <xacro:if value="${hand and ee_id != 'none' and ee_id != 'franka_hand'}">
+    <xacro:if value="${hand or (ee_id != 'none' and ee_id != 'franka_hand')}">
       <xacro:include filename="$(find franka_description)/end_effectors/common/ee_with_one_link.xacro"/>
       <xacro:include filename="$(find franka_description)/end_effectors/common/utils.xacro" />
       <xacro:include filename="$(find franka_description)/end_effectors/$(arg ee_id)/$(arg ee_id)_arguments.xacro" />
