@@ -1,28 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- ================================================================================
 COLLADA Model File
-Copyright (C) 2023 Franka Robotics GmbH
- 
+Copyright (C) 2024 Franka Robotics GmbH
+
 Licensed under the Apache License, Version 2.0 (the "License");
- 
+
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
- 
-================================================================================
- 
-NOTICE: This COLLADA model file is subject to the terms and conditions of the Apache License, 
-Version 2.0, and has been made available under that License by Franka Robotics GmbH. 
-This file, and the ideas, concepts, and techniques contained herein, are the property of 
-Franka Robotics GmbH.
- 
-The contents of this file are not endorsed by Apache Software Foundation, and are solely the 
-responsibility of Franka Robotics GmbH and its contributors.
- 
-================================================================================ -->
 
-<?xml version="1.0" encoding="utf-8"?>
+================================================================================
+
+NOTICE: This COLLADA model file is subject to the terms and conditions of the Apache License,
+Version 2.0, and has been made available under that License by Franka Robotics GmbH.
+This file, and the ideas, concepts, and techniques contained herein, are the property of
+Franka Robotics GmbH.
+
+The contents of this file are not endorsed by Apache Software Foundation, and are solely the
+responsibility of Franka Robotics GmbH and its contributors.
+
+================================================================================ -->
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
   <asset>
     <contributor>

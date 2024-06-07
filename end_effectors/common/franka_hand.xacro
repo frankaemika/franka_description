@@ -59,7 +59,7 @@
         </geometry>
       </collision>
       <xacro:if value="${gazebo}">
-        <xacro:franka-inertials name="leftfinger" />
+        <xacro:ee-inertials name="leftfinger" />
       </xacro:if>
     </link>
     <link name="${arm_id}_rightfinger">
@@ -98,7 +98,7 @@
         </geometry>
       </collision>
       <xacro:if value="${gazebo}">
-        <xacro:franka-inertials name="rightfinger" />
+        <xacro:ee-inertials name="rightfinger" />
       </xacro:if>
     </link>
     <joint name="${arm_id}_finger_joint1" type="prismatic">

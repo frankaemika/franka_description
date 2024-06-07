@@ -9,12 +9,16 @@
   <!-- kinematics: description of the kinematics that comes from a YAML file. Example definition: ${xacro.load_yaml('$(find franka_description)/robots/fr3/kinematics.yaml')} -->
   <!-- inertials: description of the inertials that comes from a YAML file. Example definition: ${xacro.load_yaml('$(find franka_description)/robots/fr3/inertials.yaml')} -->
   <!-- dynamics: description of the dynamics that comes from a YAML file. Example definition: ${xacro.load_yaml('$(find franka_description)/robots/fr3/dynamics.yaml')} -->
-  
-  <xacro:macro name="franka_arm" params="arm_id description_pkg:='franka_description' connected_to:='base' xyz:='0 0 0' rpy:='0 0 0' gazebo:=false safety_distance:=0 joint_limits inertials kinematics dynamics with_sc:=false" >
+
+  <xacro:macro name="franka_arm" params="arm_id description_pkg:='franka_description' connected_to:='base' xyz:='0 0 0' rpy:='0 0 0' gazebo:='false' safety_distance:=0 joint_limits inertials kinematics dynamics with_sc:=false" >
+    <xacro:if value="${gazebo}">
+      <xacro:property name="connected_to" value="" />
+    </xacro:if>
+
     <xacro:unless value="${not connected_to}">
-      <link name="${connected_to}"> 
+      <link name="${connected_to}">
       </link>
-      <joint name="${connected_to}" type="fixed">
+      <joint name="${connected_to}_joint" type="fixed">
         <parent link="${connected_to}"/>
         <child link="${arm_id}_link0"/>
         <origin rpy="${rpy}" xyz="${xyz}"/>
