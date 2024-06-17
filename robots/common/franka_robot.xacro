@@ -1,7 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:macro name="franka_robot" params="arm_id joint_limits kinematics inertials dynamics parent:='world' xyz:='0 0 0' rpy:='0 0 0' hand:='true' ee_id:=none gazebo:='false' with_sc:='false' ros2_control:=false robot_ip:='' use_fake_hardware:=false fake_sensor_commands:=false">
-
+  <xacro:macro name="franka_robot"
+              params="arm_id
+                      joint_limits
+                      kinematics
+                      inertials
+                      dynamics
+                      parent:='world'
+                      xyz:='0 0 0'
+                      rpy:='0 0 0'
+                      hand:='true'
+                      ee_id:=none
+                      gazebo:='false'
+                      with_sc:='false'
+                      ros2_control:=false
+                      robot_ip:=''
+                      use_fake_hardware:=false
+                      fake_sensor_commands:=false">
     <xacro:include filename="$(find franka_description)/robots/common/utils.xacro" />
 
     <xacro:include filename="$(find franka_description)/robots/common/franka_arm.xacro" />
@@ -121,7 +136,14 @@
 
     <xacro:if value="${ros2_control}">
       <xacro:include filename="$(find franka_description)/robots/common/franka_arm.ros2_control.xacro"/>
-      <xacro:franka_arm_ros2_control arm_id="$(arg arm_id)" robot_ip="$(arg robot_ip)" use_fake_hardware="$(arg use_fake_hardware)" fake_sensor_commands="$(arg fake_sensor_commands)"/>
+      <xacro:franka_arm_ros2_control
+          arm_id="$(arg arm_id)"
+          robot_ip="$(arg robot_ip)"
+          use_fake_hardware="$(arg use_fake_hardware)"
+          fake_sensor_commands="$(arg fake_sensor_commands)"
+          gazebo="$(arg gazebo)"
+          hand="$(arg hand)"
+      />
     </xacro:if>
 
   </xacro:macro>
