@@ -32,6 +32,8 @@
   <xacro:arg name="use_fake_hardware" default="false" />
   <!-- Should fake sensors be used? -->
   <xacro:arg name="fake_sensor_commands" default="false" />
+  <!-- Should the robot be spawned in Gazebo with effort interfaces?" -->
+  <xacro:arg name="gazebo_effort" default="false" />
 
   <xacro:franka_robot arm_id="$(arg arm_id)"
                       joint_limits="${xacro.load_yaml('$(find franka_description)/robots/$(arg arm_id)/joint_limits.yaml')}"
@@ -46,6 +48,5 @@
                       robot_ip="$(arg robot_ip)"
                       use_fake_hardware="$(arg use_fake_hardware)"
                       fake_sensor_commands="$(arg fake_sensor_commands)"
-                      />
-
+                      gazebo_effort="$(arg gazebo_effort)">
 </robot>

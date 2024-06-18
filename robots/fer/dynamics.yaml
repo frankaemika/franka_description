@@ -3,7 +3,7 @@ joint1:
     D: 1  
     K: 7000 
     damping: 0.003
-    friction: 0.0
+    friction: 0.2
     mu_coulomb: 0
     mu_viscous: 16
 
@@ -12,7 +12,7 @@ joint2:
     D: 1  
     K: 7000 
     damping: 0.003
-    friction: 0.0
+    friction: 0.2
     mu_coulomb: 0
     mu_viscous: 16
 
@@ -21,7 +21,7 @@ joint3:
     D: 1  
     K: 7000 
     damping: 0.003
-    friction: 0.0
+    friction: 0.2
     mu_coulomb: 0
     mu_viscous: 16
 
@@ -30,7 +30,7 @@ joint4:
     D: 1  
     K: 7000 
     damping: 0.003
-    friction: 0.0
+    friction: 0.2
     mu_coulomb: 0
     mu_viscous: 16
 
@@ -39,7 +39,7 @@ joint5:
     D: 1  
     K: 7000 
     damping: 0.003
-    friction: 0.0
+    friction: 0.2
     mu_coulomb: 0
     mu_viscous: 16
 
@@ -48,7 +48,7 @@ joint6:
     D: 1  
     K: 7000 
     damping: 0.003
-    friction: 0.0
+    friction: 0.2
     mu_coulomb: 0
     mu_viscous: 16
 
@@ -57,6 +57,6 @@ joint7:
     D: 1  
     K: 7000 
     damping: 0.003
-    friction: 0.0
+    friction: 0.2
     mu_coulomb: 0
     mu_viscous: 16

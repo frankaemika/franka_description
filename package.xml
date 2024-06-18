@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>franka_description</name>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
   <description>franka_description contains URDF files and meshes of Franka robots</description>
   <maintainer email="support@franka.de">Franka Robotics GmbH</maintainer>
   <license>Apache 2.0</license>
@@ -17,6 +17,7 @@
   <exec_depend>xacro</exec_depend>
   <exec_depend>rviz2</exec_depend>
   <exec_depend>joint_state_publisher_gui</exec_depend>
+  <exec_depend>franka_gazebo_bringup</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

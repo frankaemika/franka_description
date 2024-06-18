@@ -16,7 +16,8 @@
                       ros2_control:=false
                       robot_ip:=''
                       use_fake_hardware:=false
-                      fake_sensor_commands:=false">
+                      fake_sensor_commands:=false
+                      gazebo_effort:=false">
     <xacro:include filename="$(find franka_description)/robots/common/utils.xacro" />
 
     <xacro:include filename="$(find franka_description)/robots/common/franka_arm.xacro" />
@@ -143,6 +144,7 @@
           fake_sensor_commands="$(arg fake_sensor_commands)"
           gazebo="$(arg gazebo)"
           hand="$(arg hand)"
+          gazebo_effort="$(arg gazebo_effort)"
       />
     </xacro:if>
 

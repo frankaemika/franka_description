@@ -1,8 +1,15 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="franka_arm_ros2_control" params="arm_id robot_ip use_fake_hardware:=^|false fake_sensor_commands:=^|false gazebo:=^|false hand:=^|false">
-      <ros2_control name="FrankaHardwareInterface" type="system">
+<xacro:macro name="franka_arm_ros2_control" 
+         params="arm_id 
+             robot_ip 
+             use_fake_hardware:=^|false 
+             fake_sensor_commands:=^|false 
+             gazebo:=^|false 
+             hand:=^|false 
+             gazebo_effort:=^|false">
+    <ros2_control name="FrankaHardwareInterface" type="system">
         <hardware>
           <param name="arm_id">${arm_id}</param>
           <xacro:if value="${use_fake_hardware}">
@@ -23,9 +30,13 @@
 
       <xacro:macro name="configure_joint" params="joint_name initial_position">
         <joint name="${joint_name}">
-          <xacro:unless value="${gazebo}">
+          <!-- 
+            deactivated for gazebo velocity and position interface due to a bug 
+            https://github.com/ros-controls/gz_ros2_control/issues/343
+          -->
+          <xacro:if value="${gazebo == 0 or gazebo_effort == 1}">
             <command_interface name="effort"/>
-          </xacro:unless>
+          </xacro:if>
           <command_interface name="velocity"/>
           <command_interface name="position"/>
           <state_interface name="position">
