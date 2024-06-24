@@ -43,6 +43,7 @@
             <param name="initial_value">${initial_position}</param>
           </state_interface>
           <state_interface name="velocity"/>
+            <param name="initial_value">0.0</param>
           <state_interface name="effort"/>
         </joint>
       </xacro:macro>
@@ -61,7 +62,7 @@
     </ros2_control>
     <xacro:if value="${gazebo}">
       <gazebo>
-        <plugin filename="franka_ign_ros2_control-system" name="franka_ign_ros2_control::IgnitionROS2ControlPlugin">
+        <plugin filename="franka_ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
           <parameters>$(find franka_gazebo_bringup)/config/franka_gazebo_controllers.yaml</parameters>
         </plugin>
       </gazebo>
