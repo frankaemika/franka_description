@@ -47,4 +47,5 @@
                       use_fake_hardware="$(arg use_fake_hardware)"
                       fake_sensor_commands="$(arg fake_sensor_commands)"
                       gazebo_effort="$(arg gazebo_effort)">
+  </xacro:franka_robot>
 </robot>
