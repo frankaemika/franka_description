@@ -3,6 +3,15 @@
 
   <xacro:include filename="$(find franka_description)/robots/common/franka_robot.xacro"/>
 
+  <!-- 
+    DEPRECATION NOTICE 
+    argument arm_id is no longer supported and will be removed in the future.
+    This argument is ignored.
+  -->
+  <xacro:arg name="arm_id" default="fr3" />
+
+  <!-- Don't print a prefix for joints, visuals, and links? -->
+  <xacro:arg name="no_prefix" default="false"/>
 
   <!-- Should an end-effector be mounted at the flange?" -->
   <xacro:arg name="hand" default="true" />
@@ -44,7 +53,8 @@
                       robot_ip="$(arg robot_ip)"
                       use_fake_hardware="$(arg use_fake_hardware)"
                       fake_sensor_commands="$(arg fake_sensor_commands)"
-                      gazebo_effort="$(arg gazebo_effort)">
+                      gazebo_effort="$(arg gazebo_effort)"
+                      no_prefix="$(arg no_prefix)">
   </xacro:franka_robot>
 
 </robot>

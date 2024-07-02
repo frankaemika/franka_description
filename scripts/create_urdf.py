@@ -22,11 +22,12 @@ def str_to_bool(s):
     return s.lower() in ["true", "1", "yes", "y"]
 
 
-def convert_xacro_to_urdf(xacro_file, with_sc, ee_id, hand, robot):
+def convert_xacro_to_urdf(xacro_file, with_sc, ee_id, hand, no_prefix, robot):
     """Convert xacro file into a URDF file."""
     urdf = xacro.process_file(
         xacro_file, mappings={"with_sc": str(with_sc), "ee_id": str(
             ee_id), "hand": str(hand), "arm_id": str(robot)}
+            "no_prefix": str(no_prefix),
     )
     urdf_file = urdf.toprettyxml(indent="  ")
     return urdf_file
@@ -38,10 +39,10 @@ def convert_package_name_to_absolute_path(package_name, package_path, urdf_file)
     return urdf_file
 
 
-def urdf_generation(package_path, xacro_file, file_name, WITH_SC, EE, HAND, robot):
+def urdf_generation(package_path, xacro_file, file_name, WITH_SC, EE, HAND, NO_PREFIX, robot):
     """Generate URDF file and save it."""
     xacro_file = os.path.join(package_path, xacro_file)
-    urdf_file = convert_xacro_to_urdf(xacro_file, WITH_SC, EE, HAND, robot)
+    urdf_file = convert_xacro_to_urdf(xacro_file, WITH_SC, EE, HAND, NO_PREFIX, robot)
     if ABSOLUTE_PATHS and (HOST_DIR is None or HOST_DIR == ""):
         urdf_file = convert_package_name_to_absolute_path(
             package_name, package_path, urdf_file
@@ -119,6 +120,12 @@ if __name__ == "__main__":
         action="store_const",
         const=True,
     )
+    parser.add_argument(
+        "--no-prefix",
+        help="Override the robot prefix of links, joints and visuals in the urdf file.",
+        action="store_const",
+        const=True,
+    )
 
     args = parser.parse_args()
 
@@ -129,6 +136,7 @@ if __name__ == "__main__":
     ABSOLUTE_PATHS = args.abs_path if args.abs_path is not None else False
     HOST_DIR = args.host_dir
     ONLY_EE = args.only_ee if args.only_ee is not None else False
+    NO_PREFIX = args.no_prefix if args.no_prefix is not None else 'false'
 
     assert ROBOT_MODEL in ROBOTS or ROBOT_MODEL == "all" or ROBOT_MODEL == "none"
 
@@ -145,7 +153,7 @@ if __name__ == "__main__":
             robot_prefix = "robot"
         else:
             robot_prefix = ROBOT_MODEL
-        urdf_generation(package_path, xacro_file, file_name, WITH_SC, EE, HAND, robot_prefix)
+        urdf_generation(package_path, xacro_file, file_name, WITH_SC, EE, HAND, NO_PREFIX, robot_prefix)
     else:
         if ROBOT_MODEL == "none":
             print("\n*** Robot model must be specified ***")
@@ -161,4 +169,4 @@ if __name__ == "__main__":
                         "introducing none as ee id***")
                     print(f"\n*** Creating URDF for {robot} ***")
                     file_name = f"{robot}"
-                urdf_generation(package_path, xacro_file, file_name, WITH_SC, EE, HAND, robot)
+                urdf_generation(package_path, xacro_file, file_name, WITH_SC, EE, HAND, NO_PREFIX, robot)
