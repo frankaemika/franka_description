@@ -13,16 +13,16 @@
   <!-- Should self-collision be enabled? -->
   <xacro:arg name="with_sc" default="false" />
 
-  <!-- Positional offset between ee and parent frame -->
+  <!-- Position offset between ee and parent frame -->
   <xacro:arg name="xyz" default="0 0 0" />
 
-  <!-- Rotational offset between ee and parent frame -->
+  <!-- Rotation offset between ee and parent frame -->
   <xacro:arg name="rpy" default= "0 0 0" />
 
-  <!-- Positional offset between ee frame and tcp frame -->
+  <!-- Position offset between ee frame and tcp frame -->
   <xacro:arg name="tcp_xyz" default="0 0 0.105" />
 
-  <!-- Rotational offset between ee frame and tcp frame -->
+  <!-- Rotation offset between ee frame and tcp frame -->
   <xacro:arg name="tcp_rpy" default="0 0 0" />
 
   <!-- Safety distance for the collision capsules -->
