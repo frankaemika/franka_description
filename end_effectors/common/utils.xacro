@@ -33,7 +33,7 @@
   <!-- rpy:   Rotation of the *_sc link relative to parent [rad]  -->
   <!-- self_collision_geometries:  self <collision> models        -->
   <!-- ========================================================== -->
-  <xacro:macro name="ee_link_with_sc" params="name prefix=${arm_id}_ rpy:='0 0 0' **self_collision_geometries gazebo:=false with_sc:=false">
+  <xacro:macro name="ee_link_with_sc" params="name prefix=${ee_prefix} rpy:='0 0 0' **self_collision_geometries gazebo:=false with_sc:=false">
     <!-- sub-link defining detailed meshes for collision with environment -->
     <link name="${prefix}${name}">
       <visual name="${prefix}${name}_visual">
