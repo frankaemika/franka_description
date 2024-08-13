@@ -37,7 +37,7 @@ responsibility of Franka Robotics GmbH and its contributors.
     <effect id="Part__Feature_009_005-effect">
       <profile_COMMON>
         <technique sid="common">
-          <lambert>
+          <phong>
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
@@ -47,14 +47,14 @@ responsibility of Franka Robotics GmbH and its contributors.
             <index_of_refraction>
               <float sid="ior">1</float>
             </index_of_refraction>
-          </lambert>
+          </phong>
         </technique>
       </profile_COMMON>
     </effect>
     <effect id="Part__Feature002_005_005-effect">
       <profile_COMMON>
         <technique sid="common">
-          <lambert>
+          <phong>
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
@@ -67,14 +67,14 @@ responsibility of Franka Robotics GmbH and its contributors.
             <index_of_refraction>
               <float sid="ior">1</float>
             </index_of_refraction>
-          </lambert>
+          </phong>
         </technique>
       </profile_COMMON>
     </effect>
     <effect id="Part__Feature005_001_005-effect">
       <profile_COMMON>
         <technique sid="common">
-          <lambert>
+          <phong>
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
@@ -87,14 +87,14 @@ responsibility of Franka Robotics GmbH and its contributors.
             <index_of_refraction>
               <float sid="ior">1</float>
             </index_of_refraction>
-          </lambert>
+          </phong>
         </technique>
       </profile_COMMON>
     </effect>
     <effect id="Part__Feature001_008_005-effect">
       <profile_COMMON>
         <technique sid="common">
-          <lambert>
+          <phong>
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
@@ -104,14 +104,14 @@ responsibility of Franka Robotics GmbH and its contributors.
             <index_of_refraction>
               <float sid="ior">1</float>
             </index_of_refraction>
-          </lambert>
+          </phong>
         </technique>
       </profile_COMMON>
     </effect>
     <effect id="Part__Feature005_001_005_001-effect">
       <profile_COMMON>
         <technique sid="common">
-          <lambert>
+          <phong>
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
@@ -124,7 +124,7 @@ responsibility of Franka Robotics GmbH and its contributors.
             <index_of_refraction>
               <float sid="ior">1.45</float>
             </index_of_refraction>
-          </lambert>
+          </phong>
         </technique>
       </profile_COMMON>
     </effect>

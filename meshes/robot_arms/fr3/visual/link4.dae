@@ -37,7 +37,7 @@ responsibility of Franka Robotics GmbH and its contributors.
     <effect id="_04_05_ELBOW_URDF_color_64_64_64-effect">
       <profile_COMMON>
         <technique sid="common">
-          <lambert>
+          <phong>
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
@@ -50,14 +50,14 @@ responsibility of Franka Robotics GmbH and its contributors.
             <index_of_refraction>
               <float sid="ior">1.45</float>
             </index_of_refraction>
-          </lambert>
+          </phong>
         </technique>
       </profile_COMMON>
     </effect>
     <effect id="_04_05_ELBOW_URDF_color_202_209_238-effect">
       <profile_COMMON>
         <technique sid="common">
-          <lambert>
+          <phong>
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
@@ -70,7 +70,7 @@ responsibility of Franka Robotics GmbH and its contributors.
             <index_of_refraction>
               <float sid="ior">1.45</float>
             </index_of_refraction>
-          </lambert>
+          </phong>
         </technique>
       </profile_COMMON>
     </effect>
