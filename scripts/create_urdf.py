@@ -76,7 +76,7 @@ if __name__ == "__main__":
         print("Call the script from franka_description root folder")
         exit()
 
-    ROBOTS = ["fr3", "fp3", "fer"]
+    ROBOTS = ["multi_arm", "fr3v2", "fr3", "fp3", "fer"]
 
     END_EFFECTORS = ["none", "franka_hand", "cobot_pump"]
 
