@@ -7,17 +7,17 @@
   <!-- End-effector id" -->
   <xacro:arg name="ee_id" default="cobot_pump" />
 
-  <!-- Where is the end-effector connected to?  -->
-  <xacro:arg name="connection" default="$(arg arm_id)_link8" />
+  <!-- Where is the end-effector connected to, if different from the robot flange?  -->
+  <xacro:arg name="special_connection" default="" />
 
   <!-- Should self-collision be enabled? -->
   <xacro:arg name="with_sc" default="false" />
 
   <!-- Position offset between ee and parent frame -->
-  <xacro:arg name="xyz" default="0 0 0" />
+  <xacro:arg name="xyz_ee" default="0 0 0" />
 
   <!-- Rotation offset between ee and parent frame -->
-  <xacro:arg name="rpy" default= "0 0 0" />
+  <xacro:arg name="rpy_ee" default= "0 0 0" />
 
   <!-- Position offset between ee frame and tcp frame -->
   <xacro:arg name="tcp_xyz" default="0 0 0.105" />

@@ -51,13 +51,16 @@
       <xacro:if value="${arm_id == 'fr3' or arm_id == 'fer'}">
         <xacro:property name="ee_color" value="white" />
       </xacro:if>
+      <xacro:property name="special_connection" value="$(arg special_connection)" />
+      <xacro:property name="connection" value="${special_connection if special_connection != '' else arm_id + '_link8'}" />
       <xacro:franka_hand
-        connected_to="$(arg connection)"
+        connected_to="${arm_prefix}${connection}"
         arm_id="${arm_id}"
+        arm_prefix="${arm_prefix}"
         ee_id="${ee_id}_${ee_color}"
         ee_inertials="${xacro.load_yaml('$(find franka_description)/end_effectors/$(arg ee_id)/inertials.yaml')}"
-        rpy="$(arg rpy)"
-        xyz="$(arg xyz)"
+        rpy_ee="$(arg rpy_ee)"
+        xyz_ee="$(arg xyz_ee)"
         tcp_xyz="$(arg tcp_xyz)"
         tcp_rpy="$(arg tcp_rpy)"
         safety_distance="$(arg safety_distance)"
@@ -71,13 +74,16 @@
       <xacro:include filename="$(find franka_description)/end_effectors/common/ee_with_one_link.xacro"/>
       <xacro:include filename="$(find franka_description)/end_effectors/common/utils.xacro" />
       <xacro:include filename="$(find franka_description)/end_effectors/$(arg ee_id)/$(arg ee_id)_arguments.xacro" />
+      <xacro:property name="special_connection" value="$(arg special_connection)" />
+      <xacro:property name="connection" value="${special_connection if special_connection == '' else arm_id + '_link8'}" />
       <xacro:ee_with_one_link
-        connected_to="$(arg connection)"
+        connected_to="${arm_prefix}${connection}"
         arm_id="${arm_id}"
+        arm_prefix="${arm_prefix}"
         ee_id="${ee_id}"
         ee_inertials="${xacro.load_yaml('$(find franka_description)/end_effectors/$(arg ee_id)/inertials.yaml')}"
-        rpy="$(arg rpy)"
-        xyz="$(arg xyz)"
+        rpy_ee="$(arg rpy_ee)"
+        xyz_ee="$(arg xyz_ee)"
         tcp_xyz="$(arg tcp_xyz)"
         tcp_rpy="$(arg tcp_rpy)"
         safety_distance="$(arg safety_distance)"

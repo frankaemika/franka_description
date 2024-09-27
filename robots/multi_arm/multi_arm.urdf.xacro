@@ -14,11 +14,11 @@
   <xacro:arg name="number_of_robots" default = "2"/>
 
   <!-- Define arguments -->
-  <xacro:arg name="xyz" default="['0.5 0.5 0','0 0 0']" />
+  <xacro:arg name="xyz" default="['0 0.1 0','0 -0.1 0']" />
   <xacro:property name="xyz_list" value="${$(arg xyz)}" />
 
   <!-- Define arguments -->
-  <xacro:arg name="rpy" default="['0 0 0','0 0 0']" />
+  <xacro:arg name="rpy" default="['-0.7 0 0','0.7 0 0']" />
   <xacro:property name="rpy_list" value="${$(arg rpy)}" />
 
   <!-- Don't print a prefix for joints, visuals, and links? -->

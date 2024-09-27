@@ -4,12 +4,12 @@
   <xacro:include filename="$(find franka_description)/end_effectors/common/ee_with_one_link.xacro"/>
   <xacro:include filename="$(find franka_description)/end_effectors/cobot_pump/cobot_pump_arguments.xacro"/>
 
-  <xacro:ee_with_one_link connected_to="$(arg connection)"
+  <xacro:ee_with_one_link connected_to="$(arg special_connection)"
                           arm_id="$(arg arm_id)"
                           ee_id="$(arg ee_id)"
                           ee_inertials="${xacro.load_yaml('$(find franka_description)/end_effectors/$(arg ee_id)/inertials.yaml')}"
-                          rpy="$(arg rpy)"
-                          xyz="$(arg xyz)"
+                          rpy_ee="$(arg rpy)"
+                          xyz_ee="$(arg xyz)"
                           tcp_xyz="$(arg tcp_xyz)"
                           tcp_rpy="$(arg tcp_rpy)"
                           safety_distance="$(arg safety_distance)"
