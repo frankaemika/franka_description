@@ -3,8 +3,8 @@
 
   <xacro:include filename="$(find franka_description)/robots/common/franka_robot.xacro"/>
 
-  <!-- 
-    DEPRECATION NOTICE 
+  <!--
+    DEPRECATION NOTICE
     argument arm_id is no longer supported and will be removed in the future.
     This argument is ignored.
   -->
@@ -36,9 +36,12 @@
 
   <!-- Should the robot be spawned in Gazebo?" -->
   <xacro:arg name="gazebo" default="false" />
- 
+
   <!-- Should the robot be spawned in Gazebo with effort interfaces?" -->
   <xacro:arg name="gazebo_effort" default="false" />
+
+  <!-- For a multi arm setup, we need a threaded robot running async-->
+  <xacro:arg name="multi_arm" default="false" />
 
   <xacro:franka_robot arm_id="fp3"
                       joint_limits="${xacro.load_yaml('$(find franka_description)/robots/fp3/joint_limits.yaml')}"

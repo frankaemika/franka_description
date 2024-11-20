@@ -14,12 +14,12 @@
   <xacro:arg name="number_of_robots" default = "2"/>
 
   <!-- Define arguments -->
-  <xacro:arg name="xyz" default="['0 0.1 0','0 -0.1 0']" />
-  <xacro:property name="xyz_list" value="${$(arg xyz)}" />
+  <xacro:arg name="xyz_values" default="['0 0.1 0','0 -0.1 0']" />
+  <xacro:property name="xyz_list" value="${$(arg xyz_values)}" />
 
   <!-- Define arguments -->
-  <xacro:arg name="rpy" default="['-0.7 0 0','0.7 0 0']" />
-  <xacro:property name="rpy_list" value="${$(arg rpy)}" />
+  <xacro:arg name="rpy_values" default="['-0.7 0 0','0.7 0 0']" />
+  <xacro:property name="rpy_list" value="${$(arg rpy_values)}" />
 
   <!-- Don't print a prefix for joints, visuals, and links? -->
   <xacro:arg name="no_prefix" default="false"/>
@@ -57,9 +57,13 @@
   <xacro:arg name="arm_prefixes" default="['left','right']" />
   <xacro:property name="arm_prefixes_list" value="${$(arg arm_prefixes)}" />
 
+  <!-- For a multi arm setup, we need a threaded robot running async-->
+  <xacro:arg name="multi_arm" default="true" />
+
   <link name="base">
   </link>
 
+  <!-- The multi robot setup configures 'multi_arm' by default to true s.t. it uses the async threading approach for the hardware interface -->
   <xacro:macro name="loop" params="i">
     <xacro:unless value="${i == $(arg number_of_robots)}">
       <joint name="${arm_prefixes_list[i]}_base_joint" type="fixed">
@@ -83,7 +87,8 @@
                           gazebo_effort="$(arg gazebo_effort)"
                           no_prefix="$(arg no_prefix)"
                           arm_prefix= "${arm_prefixes_list[i]}_"
-                          connected_to="${arm_prefixes_list[i]}_base">
+                          connected_to="${arm_prefixes_list[i]}_base"
+                          multi_arm="$(arg multi_arm)">
       </xacro:franka_robot>
       <xacro:loop i="${i+1}"/>
     </xacro:unless>
