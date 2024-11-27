@@ -2,7 +2,7 @@
 Changelog for package franka_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
+0.3.0 (2024-11-27)
 ------------------
 * feature: franka_ign_ros2_control plugin for gazebo
 * feature: gazebo simulation joint friction and gazebo effort interface param
