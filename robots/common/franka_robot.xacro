@@ -25,10 +25,10 @@
     <xacro:include filename="$(find franka_description)/robots/common/utils.xacro" />
 
     <xacro:include filename="$(find franka_description)/robots/common/franka_arm.xacro" />
-
+    <xacro:property name="arm_prefix_modified" value="${'' if arm_prefix == '' else arm_prefix + '_'}" />
     <xacro:franka_arm
       arm_id="${arm_id}"
-      arm_prefix="${arm_prefix}"
+      arm_prefix="${arm_prefix_modified}"
       no_prefix="${no_prefix}"
       xyz="${xyz}"
       rpy="${rpy}"
@@ -55,9 +55,9 @@
       <xacro:property name="special_connection" value="$(arg special_connection)" />
       <xacro:property name="connection" value="${special_connection if special_connection != '' else arm_id + '_link8'}" />
       <xacro:franka_hand
-        connected_to="${arm_prefix}${connection}"
+        connected_to="${arm_prefix_modified}${connection}"
         arm_id="${arm_id}"
-        arm_prefix="${arm_prefix}"
+        arm_prefix="${arm_prefix_modified}"
         ee_id="${ee_id}_${ee_color}"
         ee_inertials="${xacro.load_yaml('$(find franka_description)/end_effectors/$(arg ee_id)/inertials.yaml')}"
         rpy_ee="$(arg rpy_ee)"
@@ -78,9 +78,9 @@
       <xacro:property name="special_connection" value="$(arg special_connection)" />
       <xacro:property name="connection" value="${special_connection if special_connection == '' else arm_id + '_link8'}" />
       <xacro:ee_with_one_link
-        connected_to="${arm_prefix}${connection}"
+        connected_to="${arm_prefix_modified}${connection}"
         arm_id="${arm_id}"
-        arm_prefix="${arm_prefix}"
+        arm_prefix="${arm_prefix_modified}"
         ee_id="${ee_id}"
         ee_inertials="${xacro.load_yaml('$(find franka_description)/end_effectors/$(arg ee_id)/inertials.yaml')}"
         rpy_ee="$(arg rpy_ee)"
