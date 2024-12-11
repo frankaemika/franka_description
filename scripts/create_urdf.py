@@ -43,7 +43,9 @@ def convert_package_name_to_absolute_path(package_name, package_path, urdf_file)
     return urdf_file
 
 
-def urdf_generation(package_path, xacro_file, file_name, ONLY_EE, WITH_SC, EE, HAND, NO_PREFIX, robot):
+def urdf_generation(
+    package_path, xacro_file, file_name, ONLY_EE, WITH_SC, EE, HAND, NO_PREFIX, robot
+):
     """Generate URDF file and save it."""
     xacro_file = os.path.join(package_path, xacro_file)
     urdf_file = convert_xacro_to_urdf(xacro_file, ONLY_EE, WITH_SC, EE, HAND, NO_PREFIX, robot)
@@ -144,7 +146,8 @@ if __name__ == "__main__":
     ONLY_EE = args.only_ee if args.only_ee is not None else False
     NO_PREFIX = args.no_prefix if args.no_prefix is not None else 'false'
 
-    assert ROBOT_MODEL in ROBOTS or ROBOT_MODEL == "all" or ROBOT_MODEL == "none" or ROBOT_MODEL == ""
+    assert ROBOT_MODEL in ROBOTS or ROBOT_MODEL == "all" or \
+           ROBOT_MODEL == "none" or ROBOT_MODEL == ""
 
     if ROBOT_MODEL != "all" and ROBOT_MODEL != "none":
         ROBOTS = [ROBOT_MODEL]
@@ -158,20 +161,28 @@ if __name__ == "__main__":
             robot_prefix = ""
         else:
             robot_prefix = ROBOT_MODEL
-        urdf_generation(package_path, xacro_file, file_name, ONLY_EE, WITH_SC, EE, HAND, NO_PREFIX, robot_prefix)
+        urdf_generation(
+            package_path, xacro_file, file_name, ONLY_EE, WITH_SC,
+            EE, HAND, NO_PREFIX, robot_prefix,
+        )
     else:
         if ROBOT_MODEL == "none" or ROBOT_MODEL == "":
             print("\n*** Robot model must be specified ***")
         else:
             for robot in ROBOTS:
                 xacro_file = f"robots/{robot}/{robot}.urdf.xacro"
-                if HAND != False and EE != "none":
+                if HAND and EE != "none":
                     print(f"\n*** Creating URDF for {robot} and {EE} ***")
                     file_name = f"{robot}_{EE}"
                 else:
-                    print(
-                        "\n*** WARNING: --no-ee argument will be removed in future releases, "
-                        "introducing none as ee id***")
+                    if not HAND:
+                        print(
+                            "\n*** WARNING: --no-ee argument will be removed in future releases, "
+                            "introducing none as ee id***"
+                        )
                     print(f"\n*** Creating URDF for {robot} ***")
                     file_name = f"{robot}"
-                urdf_generation(package_path, xacro_file, file_name, ONLY_EE, WITH_SC, EE, HAND, NO_PREFIX, robot)
+                urdf_generation(
+                    package_path, xacro_file, file_name,
+                    ONLY_EE, WITH_SC, EE, HAND, NO_PREFIX, robot,
+                )
