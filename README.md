@@ -26,7 +26,7 @@ To start the generation, execute the start.sh script. The arguments passed to th
 The urdf generation is performed by the create_urdf.py script which offers several parameters to customize the output urdf model:
 
 ```
-usage: create_urdf.py [-h] [--robot-ee] [--no-ee] [--with-sc] [--abs-path] [--host-dir HOST_DIR] [--only-ee] robot_model
+usage: create_urdf.py [-h] [--robot-ee] [--no-ee] [--with-sc] [--abs-path] [--host-dir HOST_DIR] [--only-ee] [--no-prefix] robot_model
 
 Generate franka robots urdf models. Script to be executed from franka_description root folder!
 
@@ -41,6 +41,7 @@ optional arguments:
   --abs-path           Use absolute paths.
   --host-dir HOST_DIR  Provide a host directory for the absolute path.
   --only-ee            Get URDF with solely end-effector data
+  --no-prefix          Override the robot prefix of links, joints and visuals in the urdf file.
 ```
 
 ### Visualize via ROS2

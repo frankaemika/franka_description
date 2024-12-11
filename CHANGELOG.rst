@@ -1,6 +1,12 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package franka_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+0.4.0 (2024-12-11)
+------------------
+* feature: no prefix option added
+* fix: use phong instead of lambert shading
+* fix: script create_urdf.sh needs the correct user id
+* feature: adding the .xacro definition for multi arm setups
 
 0.3.0 (2024-11-27)
 ------------------
