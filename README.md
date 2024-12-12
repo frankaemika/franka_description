@@ -31,7 +31,7 @@ usage: create_urdf.py [-h] [--robot-ee] [--no-ee] [--with-sc] [--abs-path] [--ho
 Generate franka robots urdf models. Script to be executed from franka_description root folder!
 
 positional arguments:
-  robot_model          id of the robot model (accepted values are: fr3, fp3, fer, none)
+  robot_model          id of the robot model (accepted values are: fr3, fp3, fer, multi_arm, none)
 
 optional arguments:
   -h, --help           show this help message and exit

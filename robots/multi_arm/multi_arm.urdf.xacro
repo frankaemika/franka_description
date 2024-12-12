@@ -71,11 +71,16 @@
         <child link="${arm_prefixes_list[i]}_base"/>
         <origin rpy="${rpy_list[i]}" xyz="${xyz_list[i]}"/>
       </joint>
-      <xacro:franka_robot arm_id="${arm_ids_list[i]}"
-                          joint_limits="${xacro.load_yaml('$(find franka_description)/robots/fr3/joint_limits.yaml')}"
-                          inertials="${xacro.load_yaml('$(find franka_description)/robots/fr3/inertials.yaml')}"
-                          kinematics="${xacro.load_yaml('$(find franka_description)/robots/fr3/kinematics.yaml')}"
-                          dynamics="${xacro.load_yaml('$(find franka_description)/robots/fr3/dynamics.yaml')}"
+      <xacro:property name="arm_id_i" value="${arm_ids_list[i]}"/>
+      <xacro:arg name="inertials_path" default="$(find franka_description)/robots/${arm_id_i}/inertials.yaml"/>
+      <xacro:arg name="kinematics_path" default="$(find franka_description)/robots/${arm_id_i}/kinematics.yaml"/>
+      <xacro:arg name="dynamics_path" default="$(find franka_description)/robots/${arm_id_i}/dynamics.yaml"/>
+      <xacro:arg name="joint_limits_path" default="$(find franka_description)/robots/${arm_id_i}/joint_limits.yaml"/>
+      <xacro:franka_robot arm_id="${arm_id_i}"
+                          joint_limits="${xacro.load_yaml('$(arg joint_limits_path)')}"
+                          inertials="${xacro.load_yaml('$(arg inertials_path)')}"
+                          kinematics="${xacro.load_yaml('$(arg kinematics_path)')}"
+                          dynamics="${xacro.load_yaml('$(arg dynamics_path)')}"
                           gazebo="$(arg gazebo)"
                           hand="$(arg hand)"
                           ee_id="$(arg ee_id)"
