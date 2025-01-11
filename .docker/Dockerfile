@@ -1,4 +1,4 @@
-FROM osrf/ros:humble-desktop
+FROM osrf/ros:jazzy-desktop
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -18,8 +18,8 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    ros-humble-xacro \
-    ros-humble-joint-state-publisher-gui \
+    ros-jazzy-xacro \
+    ros-jazzy-joint-state-publisher-gui \
     && rm -rf /var/lib/apt/lists/*
 
 ENV XDG_RUNTIME_DIR=/run/user/"${USER_UID}"
