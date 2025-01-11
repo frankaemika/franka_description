@@ -8,6 +8,7 @@ ARG USERNAME=user
 
 WORKDIR /workspaces
 
+# Create user/group only of no such user/group exists
 RUN (getent group $USER_GID || groupadd --gid $USER_GID $USERNAME) \
     && (getent passwd $USER_UID || useradd --uid $USER_UID --gid $USER_GID -m $USERNAME) \
     && mkdir -p -m 0700 /run/user/"${USER_UID}" \
