@@ -19,7 +19,7 @@ RUN (getent group $USER_GID || groupadd --gid $USER_GID $USERNAME) \
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    ros-jazzy-xacro \
+    ros-jazzy-humble \
     ros-jazzy-joint-state-publisher-gui \
     && rm -rf /var/lib/apt/lists/*
 
