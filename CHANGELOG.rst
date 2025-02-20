@@ -1,6 +1,12 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package franka_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Pending Release
+---------------
+
+* Feat: Added prefix to single robot control
+
 0.4.0 (2024-12-11)
 ------------------
 * feature: no prefix option added

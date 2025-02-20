@@ -10,6 +10,9 @@
   -->
   <xacro:arg name="arm_id" default="fp3" />
 
+  <!-- The prefix of the robot -->
+  <xacro:arg name="arm_prefix" default="" />
+
   <!-- Don't print a prefix for joints, visuals, and links? -->
   <xacro:arg name="no_prefix" default="false"/>
 
@@ -58,7 +61,7 @@
                       fake_sensor_commands="$(arg fake_sensor_commands)"
                       gazebo_effort="$(arg gazebo_effort)"
                       no_prefix="$(arg no_prefix)"
-                      arm_prefix= ""
+                      arm_prefix="$(arg arm_prefix)"
                       connected_to= "base">
   </xacro:franka_robot>
 
