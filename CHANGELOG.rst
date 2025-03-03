@@ -5,7 +5,8 @@ Changelog for package franka_description
 Pending Release
 ---------------
 
-* Feat: Added prefix to single robot control
+* feat: Added prefix to single robot control
+* fix: hand inertials fixed
 
 0.4.0 (2024-12-11)
 ------------------
