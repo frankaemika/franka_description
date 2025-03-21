@@ -45,6 +45,13 @@
   <!-- For a multi arm setup, we need a threaded robot running async-->
   <xacro:arg name="multi_arm" default="false" />
 
+  <!-- The prefix of the robot -->
+  <xacro:arg name="arm_prefix" default="" />
+
+  <!-- Append an underscore to the user-provided prefix, if non-empty. -->
+  <xacro:property name="prefix" value="$(arg arm_prefix)"/>
+  <xacro:property name="modified_prefix" value="${prefix + '_' if prefix else ''}"/>
+
   <xacro:franka_robot arm_id="fer"
                       joint_limits="${xacro.load_yaml('$(find franka_description)/robots/fer/joint_limits.yaml')}"
                       inertials="${xacro.load_yaml('$(find franka_description)/robots/fer/inertials.yaml')}"
@@ -60,7 +67,7 @@
                       fake_sensor_commands="$(arg fake_sensor_commands)"
                       gazebo_effort="$(arg gazebo_effort)"
                       no_prefix="$(arg no_prefix)"
-                      arm_prefix= ""
+                      arm_prefix= "${modified_prefix}"
                       connected_to= "base">
   </xacro:franka_robot>
 </robot>
