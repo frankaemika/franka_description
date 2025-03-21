@@ -45,6 +45,10 @@
 
   <!-- For a multi arm setup, we need a threaded robot running async-->
   <xacro:arg name="multi_arm" default="false" />
+  
+  <!-- Append an underscore to the user-provided prefix, if non-empty. -->
+  <xacro:property name="prefix" value="$(arg arm_prefix)"/>
+  <xacro:property name="modified_prefix" value="${prefix + '_' if prefix else ''}"/>
 
   <xacro:franka_robot arm_id="fr3"
                       joint_limits="${xacro.load_yaml('$(find franka_description)/robots/fr3/joint_limits.yaml')}"
