@@ -8,13 +8,14 @@ ARG USERNAME=user
 
 WORKDIR /workspaces
 
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+# Create user/group only of no such user/group exists
+RUN (getent group $USER_GID || groupadd --gid $USER_GID $USERNAME) \
+    && (getent passwd $USER_UID || useradd --uid $USER_UID --gid $USER_GID -m $USERNAME) \
     && mkdir -p -m 0700 /run/user/"${USER_UID}" \
     && mkdir -p -m 0700 /run/user/"${USER_UID}"/gdm \
-    && chown user:user /run/user/"${USER_UID}" \
-    && chown user:user /workspaces \
-    && chown user:user /run/user/"${USER_UID}"/gdm 
+    && chown $USER_UID:$USER_GID /run/user/"${USER_UID}" \
+    && chown $USER_UID:$USER_GID /workspaces \
+    && chown $USER_UID:$USER_GID /run/user/"${USER_UID}"/gdm 
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -24,7 +25,9 @@ RUN apt-get update && \
 
 ENV XDG_RUNTIME_DIR=/run/user/"${USER_UID}"
 
-USER $USERNAME
+# Specify user by UID & GID so this script doesn't
+# depend on the exact username
+USER $USER_UID:$USER_GID
 
 RUN echo "source /ros_entrypoint.sh" >>~/.bashrc
 ARG MAX_ROS_DOMAIN_ID=232
